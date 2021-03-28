@@ -1,8 +1,8 @@
 {
   "name": "gatsby-starter-dimension-v2",
-  "description": "Gatsby Starter - Dimension V2",
+  "description": "Joëlle & Kemal Wedding Website",
   "version": "1.0.0",
-  "author": "Hunter Chang",
+  "author": "Kemal Gültekin",
   "dependencies": {
     "gatsby": "^2.19.5",
     "gatsby-plugin-manifest": "^2.2.38",
@@ -28,6 +28,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/SolidPatterns/jk-wedding"
   }
 }
