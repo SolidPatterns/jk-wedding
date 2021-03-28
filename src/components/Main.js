@@ -140,13 +140,13 @@ class Main extends React.Component {
           <ul className="icons">
             <li>
               <a
-                href="https://twitter.com/HuntaroSan"
+                href="https://twitter.com/quemarlos"
                 className="icon fa-twitter"
               >
                 <span className="label">Twitter</span>
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="https://codebushi.com" className="icon fa-facebook">
                 <span className="label">Facebook</span>
               </a>
@@ -163,7 +163,7 @@ class Main extends React.Component {
               >
                 <span className="label">GitHub</span>
               </a>
-            </li>
+            </li> */}
           </ul>
           {close}
         </article>
