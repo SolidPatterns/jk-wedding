@@ -8,28 +8,27 @@ const Header = props => (
     </div>
     <div className="content">
       <div className="inner">
-        <h1>J&K Wedding</h1>
+        <h1>Save the Date</h1>
+        <p>We are getting married!</p>
         <p>
-          We are getting married!
-          <br />
-          Save the date
-          <br />
-          <time datetime="2021-11-13">13•11•2021</time>
+          <b><time datetime="2021-11-13">13•November•2021</time></b>
+          <div>Amsterdam</div>
         </p>
+        <p></p>
       </div>
     </div>
     <nav>
       <ul>
-        <li>
+        {/* <li>
           <button
             onClick={() => {
               props.onOpenArticle('intro')
             }}
           >
-            Intro
+            Joëlle & Kemal
           </button>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <button
             onClick={() => {
               props.onOpenArticle('work')
@@ -46,14 +45,14 @@ const Header = props => (
           >
             About
           </button>
-        </li>
+        </li> */}
         <li>
           <button
             onClick={() => {
               props.onOpenArticle('contact')
             }}
           >
-            Contact
+            How can we reach you?
           </button>
         </li>
       </ul>
