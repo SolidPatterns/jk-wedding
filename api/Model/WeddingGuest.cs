@@ -20,5 +20,18 @@ namespace JKWedding.Model
         public string PostCode { get; set; }
         public string Address { get; set; }
         public string Message { get; set; }
+
+        public WeddingGuest Normalize() {
+            FirstName = FirstName.Trim();
+            LastName = LastName.Trim();
+            Email = Email.Trim();
+            PhoneNumber = PhoneNumber.Trim();
+            Country = Country.Trim();
+            City = City.Trim();
+            PostCode = PostCode.ToUpper().Trim();
+            Address = Address.Trim();
+            Message = Message.Trim();
+            return this;
+        }
     }
 }
