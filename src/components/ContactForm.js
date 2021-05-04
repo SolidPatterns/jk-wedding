@@ -178,6 +178,7 @@ class ContactForm extends React.Component {
               rows="4"
               value={this.state.fields.address || ''}
               onChange={this.handleInputChange}
+              maxlength="250"
               required
             ></textarea>
           </div>
