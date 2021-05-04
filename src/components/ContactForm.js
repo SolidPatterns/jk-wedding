@@ -7,7 +7,7 @@ class ContactForm extends React.Component {
       fields: {},
       misc: {
         submitted: false,
-        successfullMessage: "Lovely! We've got it, thank you ♡ - Joëlle & Kemal",
+        successfullMessage: "Lovely! We've got it, thank you ♡ Joëlle & Kemal",
       },
       errors: {
         hasErrors: false,
@@ -79,7 +79,7 @@ class ContactForm extends React.Component {
           action="#"
           id="contactForm"
           onSubmit={this.handleSubmit}
-          className={!this.state.misc.submitted ? '' : 'hide'}
+          className={!this.state.misc.submitted && !this.state.errors.hasErrors ? '' : 'hide'}
         >
           <div className="field half first">
             <label htmlFor="firstName">First Name</label>
