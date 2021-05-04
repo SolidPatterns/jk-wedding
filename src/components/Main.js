@@ -114,7 +114,6 @@ class Main extends React.Component {
           }`}
           style={{ display: 'none' }}
         >
-          <h2 className="major">Contact</h2>
           <ContactForm></ContactForm>
           {/* <ul className="icons">
             <li>

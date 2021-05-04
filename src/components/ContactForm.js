@@ -7,7 +7,7 @@ class ContactForm extends React.Component {
       fields: {},
       misc: {
         submitted: false,
-        successfullMessage: "We've got your details, thank you!",
+        successfullMessage: "Lovely! We've got it, thank you ♡ - Joëlle & Kemal",
       },
       errors: {
         hasErrors: false,
@@ -51,8 +51,8 @@ class ContactForm extends React.Component {
       .then(response => {
         if (!response.ok) {
           this.handleError(response)
-        } 
-        if(response.ok) {
+        }
+        if (response.ok) {
           let misc = this.state.misc
           misc.submitted = true
           this.setState({ misc })
@@ -73,6 +73,7 @@ class ContactForm extends React.Component {
   render() {
     return (
       <div>
+        <h2 className="major">Your contact info</h2>
         <form
           method="post"
           action="#"
@@ -88,6 +89,7 @@ class ContactForm extends React.Component {
               id="firstName"
               value={this.state.fields.firstName || ''}
               onChange={this.handleInputChange}
+              maxlength="25"
               required
             />
           </div>
@@ -99,6 +101,7 @@ class ContactForm extends React.Component {
               id="lastName"
               value={this.state.fields.lastName || ''}
               onChange={this.handleInputChange}
+              maxlength="25"
               required
             />
           </div>
@@ -110,6 +113,7 @@ class ContactForm extends React.Component {
               id="email"
               value={this.state.fields.email || ''}
               onChange={this.handleInputChange}
+              maxlength="100"
               required
             />
           </div>
@@ -121,6 +125,7 @@ class ContactForm extends React.Component {
               id="mobileNumber"
               value={this.state.fields.mobileNumber || ''}
               onChange={this.handleInputChange}
+              maxlength="100"
               required
             />
           </div>
@@ -133,11 +138,8 @@ class ContactForm extends React.Component {
               onChange={this.handleInputChange}
               required
             >
-              <option value="">
-              </option>
-              <option value="NL">
-                Nederlands
-              </option>
+              <option value=""></option>
+              <option value="NL">Nederlands</option>
               <option value="TR">Turkey</option>
               <option value="FR">France</option>
               <option value="BE">Belgium</option>
@@ -152,6 +154,19 @@ class ContactForm extends React.Component {
               id="city"
               value={this.state.fields.city || ''}
               onChange={this.handleInputChange}
+              maxlength="100"
+              required
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="postCode">Post Code</label>
+            <input
+              type="text"
+              name="postCode"
+              id="postCode"
+              value={this.state.fields.postCode || ''}
+              onChange={this.handleInputChange}
+              maxlength="15"
               required
             />
           </div>
@@ -176,6 +191,7 @@ class ContactForm extends React.Component {
               rows="4"
               value={this.state.fields.message || ''}
               onChange={this.handleInputChange}
+              maxlength="1000"
             ></textarea>
           </div>
           <input type="submit" value="Submit" className="special" />
