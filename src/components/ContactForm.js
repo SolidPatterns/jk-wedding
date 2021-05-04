@@ -118,7 +118,7 @@ class ContactForm extends React.Component {
             />
           </div>
           <div className="field">
-            <label htmlFor="mobileNumber">Mobile Number ( e.g. +31629123456 or +905361237843)</label>
+            <label htmlFor="mobileNumber">Mobile Number</label>
             <input
               type="text"
               name="mobileNumber"
