@@ -13,8 +13,8 @@ namespace JKWedding.Model
         public string Id => RowKey;
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; internal set; }
-        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string MobileNumber { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string PostCode { get; set; }
@@ -25,7 +25,7 @@ namespace JKWedding.Model
             FirstName = FirstName.Trim();
             LastName = LastName.Trim();
             Email = Email.Trim();
-            PhoneNumber = PhoneNumber.Trim();
+            MobileNumber = MobileNumber.Trim();
             Country = Country.Trim();
             City = City.Trim();
             PostCode = PostCode.ToUpper().Trim();

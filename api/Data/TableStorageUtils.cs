@@ -105,7 +105,7 @@ namespace JKWedding.Data
                 WeddingGuest weddingGuest = result.Result as WeddingGuest;
                 if (weddingGuest != null)
                 {
-                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", weddingGuest.PartitionKey, weddingGuest.RowKey, weddingGuest.Email, weddingGuest.PhoneNumber);
+                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", weddingGuest.PartitionKey, weddingGuest.RowKey, weddingGuest.Email, weddingGuest.MobileNumber);
                 }
 
                 if (result.RequestCharge.HasValue)
