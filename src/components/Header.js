@@ -52,7 +52,7 @@ const Header = props => (
               props.onOpenArticle('contact')
             }}
           >
-            Please click & share your address
+            Please click & share your contact 
           </button>
         </li>
       </ul>

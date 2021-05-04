@@ -73,13 +73,16 @@ class ContactForm extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="major">Your contact info</h2>
         <form
           method="post"
           action="#"
           id="contactForm"
           onSubmit={this.handleSubmit}
-          className={!this.state.misc.submitted && !this.state.errors.hasErrors ? '' : 'hide'}
+          className={
+            !this.state.misc.submitted && !this.state.errors.hasErrors
+              ? ''
+              : 'hide'
+          }
         >
           <div className="field half first">
             <label htmlFor="firstName">First Name</label>
@@ -129,7 +132,7 @@ class ContactForm extends React.Component {
               required
             />
           </div>
-          <div className="field">
+          <div className="field half first">
             <label htmlFor="country">Country</label>
             <select
               name="country"
@@ -146,7 +149,7 @@ class ContactForm extends React.Component {
               <option value="CA">Canada</option>
             </select>
           </div>
-          <div className="field">
+          <div className="field half">
             <label htmlFor="city">City</label>
             <input
               type="text"
@@ -183,9 +186,7 @@ class ContactForm extends React.Component {
             ></textarea>
           </div>
           <div className="field">
-            <label htmlFor="message">
-              Message - just in case you want to say something to us :)
-            </label>
+            <label htmlFor="message">Want to say something to us?</label>
             <textarea
               name="message"
               id="message"
