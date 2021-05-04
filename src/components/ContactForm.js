@@ -118,14 +118,14 @@ class ContactForm extends React.Component {
             />
           </div>
           <div className="field">
-            <label htmlFor="mobileNumber">Mobile Number</label>
+            <label htmlFor="mobileNumber">Mobile Number ( e.g. +31629123456 or +905361237843)</label>
             <input
-              type="tel"
+              type="text"
               name="mobileNumber"
               id="mobileNumber"
               value={this.state.fields.mobileNumber || ''}
               onChange={this.handleInputChange}
-              maxlength="100"
+              maxlength="50"
               required
             />
           </div>
