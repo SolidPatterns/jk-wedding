@@ -41,7 +41,7 @@ const Layout = ({ children, location }) => {
           <Helmet
             title={data.site.siteMetadata.title}
             meta={[
-              { name: 'description', content: 'Joëlle & Kemal Wedding | 13•11•2021' },
+              { name: 'description', content: 'Joëlle & Kemal Wedding | AMSTERDAM | 13•11•2021' },
               { name: 'keywords', content: 'joelle-kemal, save-the-date, wedding' },
             ]}
           >
