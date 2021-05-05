@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'J&K Wedding',
+    title: 'Joëlle x Kemal | Wedding',
     author: 'Kemal Gültekin',
     description: 'Joëlle & Kemal are getting married!',
   },
