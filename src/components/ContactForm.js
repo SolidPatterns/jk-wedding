@@ -1,4 +1,5 @@
 import React from 'react'
+import thankYouCaillou from '../images/thank-you.png'
 
 class ContactForm extends React.Component {
   constructor(props) {
@@ -202,7 +203,7 @@ class ContactForm extends React.Component {
           <p>
             {this.state.misc.successfullMessage}
           </p>
-          <img src="../images/thank-you.png" alt="thank you by Caillou"/>
+          <img src={thankYouCaillou} alt="thank you by Caillou"/>
         </div>
         <p className={this.state.errors.hasErrors ? '' : 'hide'}>
           {this.state.errors.errorMessage}
