@@ -8,6 +8,7 @@ class ContactForm extends React.Component {
       fields: {},
       misc: {
         submitted: false,
+        disableSubmission: false,
         successfullMessage: "Lovely! We've got it, thank you ♡ Joëlle & Kemal",
       },
       errors: {
@@ -67,6 +68,9 @@ class ContactForm extends React.Component {
 
   handleSubmit(event) {
     console.log('Submitted: ' + JSON.stringify(this.state.fields))
+    let misc = this.state.misc
+    misc.disableSubmission = true
+    this.setState({ misc })
     this.submitContactDetails(this.state.fields)
     event.preventDefault()
   }
@@ -196,7 +200,7 @@ class ContactForm extends React.Component {
               maxlength="1000"
             ></textarea>
           </div>
-          <input type="submit" value="Submit" className="special" disabled={this.state.misc.submitted}/>
+          <input type="submit" value="Submit" className="special" disabled={this.state.misc.disableSubmission}/>
         </form>
         <div className={this.state.misc.submitted ? '' : 'hide'}>
           <p>
