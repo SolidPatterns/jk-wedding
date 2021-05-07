@@ -198,9 +198,12 @@ class ContactForm extends React.Component {
           </div>
           <input type="submit" value="Submit" className="special" />
         </form>
-        <p className={this.state.misc.submitted ? '' : 'hide'}>
-          {this.state.misc.successfullMessage}
-        </p>
+        <div className={this.state.misc.submitted ? '' : 'hide'}>
+          <p>
+            {this.state.misc.successfullMessage}
+          </p>
+          <img src="../images/thank-you.png" alt="thank you by Caillou"/>
+        </div>
         <p className={this.state.errors.hasErrors ? '' : 'hide'}>
           {this.state.errors.errorMessage}
         </p>
