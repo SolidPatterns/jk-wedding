@@ -11,6 +11,7 @@ using Newtonsoft.Json.Serialization;
 using JKWedding.Data;
 using System.Threading;
 using System;
+using System.Linq;
 
 namespace JKWedding.Function
 {
@@ -66,8 +67,8 @@ namespace JKWedding.Function
                 return new UnauthorizedResult();
             }
 
-            var guests = await TableStorageUtils.RetrieveAllAsync();
-            return new OkObjectResult(guests);
+            var guests = await TableStorageUtils.RetrieveAllAsync(); 
+            return new OkObjectResult(guests.ToList().OrderByDescending(x => x.Timestamp));
         }
 
         private static async Task AddNewWeddingGuest(WeddingGuest data)
