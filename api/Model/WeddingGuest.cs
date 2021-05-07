@@ -22,15 +22,15 @@ namespace JKWedding.Model
         public string Message { get; set; }
 
         public WeddingGuest Normalize() {
-            Name = Name.Trim();
-            SecondName = SecondName.Trim();
-            Email = Email.Trim();
-            MobileNumber = MobileNumber.Trim();
-            Country = Country.Trim();
-            City = City.Trim();
-            PostCode = PostCode.ToUpper().Trim();
-            Address = Address.Trim();
-            Message = Message.Trim();
+            Name = Name?.Trim();
+            SecondName = SecondName?.Trim();
+            Email = Email?.Trim();
+            MobileNumber = MobileNumber?.Trim();
+            Country = Country?.Trim();
+            City = City?.Trim();
+            PostCode = PostCode?.ToUpper().Trim();
+            Address = Address?.Trim();
+            Message = Message?.Trim();
             return this;
         }
     }

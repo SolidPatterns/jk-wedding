@@ -196,7 +196,7 @@ class ContactForm extends React.Component {
               maxlength="1000"
             ></textarea>
           </div>
-          <input type="submit" value="Submit" className="special" />
+          <input type="submit" value="Submit" className="special" disabled={this.state.misc.submitted}/>
         </form>
         <div className={this.state.misc.submitted ? '' : 'hide'}>
           <p>
