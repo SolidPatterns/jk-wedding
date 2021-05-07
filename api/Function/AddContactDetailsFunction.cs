@@ -10,6 +10,7 @@ using JKWedding.Model;
 using Newtonsoft.Json.Serialization;
 using JKWedding.Data;
 using System.Threading;
+using System;
 
 namespace JKWedding.Function
 {
@@ -17,16 +18,56 @@ namespace JKWedding.Function
     {
 
         [FunctionName("guests")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+        public static async Task<IActionResult> Post(
+            [HttpTrigger(AuthorizationLevel.Function, "post", "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var data = JsonConvert.DeserializeObject<WeddingGuest>(requestBody, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            log.LogInformation("C# HTTP post trigger function processed a request.");
 
-            await AddNewWeddingGuest(data);
-            return new OkObjectResult(null);
+            if (HttpMethods.IsGet(req.Method))
+            {
+                if (!req.GetQueryParameterDictionary().TryGetValue("key", out string key))
+                {
+                    return new UnauthorizedResult();
+                }
+
+                string keyToCheck = System.Environment.GetEnvironmentVariable("Key", EnvironmentVariableTarget.Process);
+                if (!key.Equals(keyToCheck, StringComparison.OrdinalIgnoreCase))
+                {
+                    return new UnauthorizedResult();
+                }
+
+                var guests = await TableStorageUtils.RetrieveAllAsync();
+                return new OkObjectResult(guests);
+            }
+
+            if (HttpMethods.IsPost(req.Method))
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                var data = JsonConvert.DeserializeObject<WeddingGuest>(requestBody, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+
+                await AddNewWeddingGuest(data);
+                return new OkObjectResult(null);
+
+            }
+
+            return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
+        }
+
+        public static async Task<IActionResult> Get(
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation("C# HTTP get trigger function processed a request.");
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+            if (!req.GetQueryParameterDictionary().TryGetValue("key", out string key))
+            {
+                return new UnauthorizedResult();
+            }
+
+            var guests = await TableStorageUtils.RetrieveAllAsync();
+            return new OkObjectResult(guests);
         }
 
         private static async Task AddNewWeddingGuest(WeddingGuest data)

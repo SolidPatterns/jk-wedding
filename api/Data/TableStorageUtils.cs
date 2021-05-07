@@ -6,6 +6,7 @@ namespace JKWedding.Data
     using Microsoft.Azure.Cosmos.Table;
     using Microsoft.Azure.Documents;
     using JKWedding.Model;
+    using System.Collections.Generic;
 
     public class TableStorageUtils
     {
@@ -96,7 +97,7 @@ namespace JKWedding.Data
             return table;
         }
 
-         //  <QueryData>
+        //  <QueryData>
         public static async Task<WeddingGuest> RetrieveEntityUsingPointQueryAsync(CloudTable table, string partitionKey, string rowKey)
         {
             try
@@ -123,7 +124,26 @@ namespace JKWedding.Data
                 throw;
             }
         }
-        //  </QueryData>
+
+        public static async Task<IEnumerable<WeddingGuest>> RetrieveAllAsync()
+        {
+            string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
+            string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
+            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(storageConnectionString);
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient(new TableClientConfiguration());
+            var table = await TableStorageUtils.CreateTableAsync();
+
+            TableContinuationToken token = null;
+            var entities = new List<WeddingGuest>();
+            do
+            {
+                var queryResult = table.ExecuteQuerySegmented(new TableQuery<WeddingGuest>(), token);
+                entities.AddRange(queryResult.Results);
+                token = queryResult.ContinuationToken;
+            } while (token != null);
+
+            return entities;
+        }
 
         //  <InsertItem>
         public static async Task<WeddingGuest> InsertOrMergeEntityAsync(CloudTable table, WeddingGuest entity)
