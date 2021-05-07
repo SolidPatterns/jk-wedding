@@ -106,7 +106,6 @@ class ContactForm extends React.Component {
               value={this.state.fields.secondName || ''}
               onChange={this.handleInputChange}
               maxlength="75"
-              required
             />
           </div>
           <div className="field">
