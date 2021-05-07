@@ -33,10 +33,11 @@ namespace JKWedding.Data
         //  </createStorageAccount>
 
         //  <CreateTable>
-        public static async Task<CloudTable> CreateTableAsync(string tableName)
+        public static async Task<CloudTable> CreateTableAsync()
         {
             // string storageConnectionString = AppSettings.LoadAppSettings().StorageConnectionString;
-            string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);;
+            string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
+            string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
 
             // Retrieve storage account information from connection string.
             CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(storageConnectionString);

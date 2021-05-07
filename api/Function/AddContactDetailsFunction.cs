@@ -33,7 +33,7 @@ namespace JKWedding.Function
         {
             if (data == null) return;
 
-            var table = await TableStorageUtils.CreateTableAsync("WeddingGuests");
+            var table = await TableStorageUtils.CreateTableAsync();
             await TableStorageUtils.InsertOrMergeEntityAsync(table, data.Normalize());
         }
     }
