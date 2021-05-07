@@ -11,8 +11,8 @@ namespace JKWedding.Model
             RowKey = Guid.NewGuid().ToString();
         }
         public string Id => RowKey;
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
+        public string SecondName { get; set; }
         public string Email { get; set; }
         public string MobileNumber { get; set; }
         public string Country { get; set; }
@@ -22,8 +22,8 @@ namespace JKWedding.Model
         public string Message { get; set; }
 
         public WeddingGuest Normalize() {
-            FirstName = FirstName.Trim();
-            LastName = LastName.Trim();
+            Name = Name.Trim();
+            SecondName = SecondName.Trim();
             Email = Email.Trim();
             MobileNumber = MobileNumber.Trim();
             Country = Country.Trim();

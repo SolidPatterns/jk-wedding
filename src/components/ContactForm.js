@@ -84,27 +84,27 @@ class ContactForm extends React.Component {
               : 'hide'
           }
         >
-          <div className="field half first">
-            <label htmlFor="firstName">First Name</label>
+          <div className="field">
+            <label htmlFor="name">Your name</label>
             <input
               type="text"
-              name="firstName"
-              id="firstName"
-              value={this.state.fields.firstName || ''}
+              name="name"
+              id="name"
+              value={this.state.fields.name || ''}
               onChange={this.handleInputChange}
-              maxlength="25"
+              maxlength="75"
               required
             />
           </div>
-          <div className="field half">
-            <label htmlFor="lastName">Last Name</label>
+          <div className="field">
+            <label htmlFor="secondName">Your +1's name (if applicable)</label>
             <input
               type="text"
-              name="lastName"
-              id="lastName"
-              value={this.state.fields.lastName || ''}
+              name="secondName"
+              id="secondName"
+              value={this.state.fields.secondName || ''}
               onChange={this.handleInputChange}
-              maxlength="25"
+              maxlength="75"
               required
             />
           </div>
@@ -186,7 +186,7 @@ class ContactForm extends React.Component {
             ></textarea>
           </div>
           <div className="field">
-            <label htmlFor="message">Want to say something to us?</label>
+            <label htmlFor="message">Have something to tell us?</label>
             <textarea
               name="message"
               id="message"
