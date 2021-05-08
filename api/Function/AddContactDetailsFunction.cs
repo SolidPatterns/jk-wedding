@@ -39,7 +39,7 @@ namespace JKWedding.Function
                 }
 
                 var guests = await TableStorageUtils.RetrieveAllAsync();
-                return new OkObjectResult(guests);
+                return new OkObjectResult(guests.OrderByDescending(x=>x.Timestamp));
             }
 
             if (HttpMethods.IsPost(req.Method))
@@ -53,22 +53,6 @@ namespace JKWedding.Function
             }
 
             return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
-        }
-
-        public static async Task<IActionResult> Get(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
-            ILogger log)
-        {
-            log.LogInformation("C# HTTP get trigger function processed a request.");
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-
-            if (!req.GetQueryParameterDictionary().TryGetValue("key", out string key))
-            {
-                return new UnauthorizedResult();
-            }
-
-            var guests = await TableStorageUtils.RetrieveAllAsync(); 
-            return new OkObjectResult(guests.ToList().OrderByDescending(x => x.Timestamp));
         }
 
         private static async Task AddNewWeddingGuest(WeddingGuest data)

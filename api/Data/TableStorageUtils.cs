@@ -125,7 +125,7 @@ namespace JKWedding.Data
             }
         }
 
-        public static async Task<IEnumerable<WeddingGuest>> RetrieveAllAsync()
+        public static async Task<IList<WeddingGuest>> RetrieveAllAsync()
         {
             string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
             string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
