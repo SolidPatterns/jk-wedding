@@ -7,7 +7,7 @@ const ParentThatFetches = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch('api/guests?key=' + key)
+      const resp = await fetch('/api/guests?key=' + key)
       const json = await resp.json()
       updateData(json)
     }
