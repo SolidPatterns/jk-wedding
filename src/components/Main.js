@@ -42,10 +42,10 @@ class Main extends React.Component {
             ></iframe>
           </span>
           <p>
-            It's super easy! Het Rijk van de Keizer is only 15 mins by car from
-            Amsterdam Central Station, and only 10 minutes by car from Amsterdam
-            Sloterdijk Station. Easiest way to get there is to take an Uber or
-            taxi.
+            It's super easy! Het Rijk van de Keizer is only 15 minutes from
+            Amsterdam Central Station, and only 10 minutes from Amsterdam
+            Sloterdijk Station by car. Easiest way to get there is to take an Uber or
+            to hop on a taxi.
           </p>
           <p>
             You can click on the map above or hit{' '}
@@ -100,7 +100,7 @@ class Main extends React.Component {
           </span> */}
           <p>
             In case you need to ask something that we weren't able to cover
-            here, you may call our lovely ceremony masters.
+            here, feel free to give our lovely ceremony masters a call.
           </p>
           <a href="tel:+31624138693">Florrie Walraven</a>
           <br />
