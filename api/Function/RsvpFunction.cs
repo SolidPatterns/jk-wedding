@@ -18,14 +18,14 @@ namespace JKWedding.Function
     public static partial class AddWeddingGuestFunction
     {
 
-        [FunctionName("guests")]
-        public static async Task<IActionResult> GetOrPostGuest(
+        [FunctionName("rsvps")]
+        public static async Task<IActionResult> GetOrPostRsvps(
             [HttpTrigger(AuthorizationLevel.Function, "post", "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("guests function processed a request.");
+            log.LogInformation("rsvps function processed a request.");
 
-            var weddingGuestsTableName = System.Environment.GetEnvironmentVariable("WeddingGuestsTableName", EnvironmentVariableTarget.Process);
+            var rsvpsTableName = System.Environment.GetEnvironmentVariable("RsvpsTableName", EnvironmentVariableTarget.Process);
 
             if (HttpMethods.IsGet(req.Method))
             {
@@ -40,16 +40,16 @@ namespace JKWedding.Function
                     return new UnauthorizedResult();
                 }
 
-                var guests = await TableStorageUtils.RetrieveAllWeddingGuestsAsync(weddingGuestsTableName);
+                var guests = await TableStorageUtils.RetrieveAllRsvpsAsync(rsvpsTableName);
                 return new OkObjectResult(guests.OrderByDescending(x => x.Timestamp));
             }
 
             if (HttpMethods.IsPost(req.Method))
             {
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                var data = JsonConvert.DeserializeObject<WeddingGuest>(requestBody, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+                var data = JsonConvert.DeserializeObject<RsvpResponse>(requestBody, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
 
-                await AddNewWeddingGuest(data, weddingGuestsTableName);
+                await Rsvp(data, rsvpsTableName);
                 return new OkObjectResult(null);
 
             }
@@ -57,7 +57,7 @@ namespace JKWedding.Function
             return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
         }
 
-        private static async Task AddNewWeddingGuest(WeddingGuest data, string tableName)
+        private static async Task Rsvp(RsvpResponse data, string tableName)
         {
             if (data == null) return;
 

@@ -34,10 +34,10 @@ namespace JKWedding.Data
         //  </createStorageAccount>
 
         //  <CreateTable>
-        public static async Task<CloudTable> CreateTableAsync()
+        public static async Task<CloudTable> CreateTableAsync(string tableName)
         {
             // string storageConnectionString = AppSettings.LoadAppSettings().StorageConnectionString;
-            string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
+            // string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
             string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
 
             // Retrieve storage account information from connection string.
@@ -125,13 +125,13 @@ namespace JKWedding.Data
             }
         }
 
-        public static async Task<IList<WeddingGuest>> RetrieveAllAsync()
+        public static async Task<IList<WeddingGuest>> RetrieveAllWeddingGuestsAsync(string tableName)
         {
-            string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
+            // string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
             string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
             CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(storageConnectionString);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient(new TableClientConfiguration());
-            var table = await TableStorageUtils.CreateTableAsync();
+            var table = await TableStorageUtils.CreateTableAsync(tableName);
 
             TableContinuationToken token = null;
             var entities = new List<WeddingGuest>();
@@ -145,8 +145,28 @@ namespace JKWedding.Data
             return entities;
         }
 
+        public static async Task<IList<RsvpResponse>> RetrieveAllRsvpsAsync(string tableName)
+        {
+            // string tableName = System.Environment.GetEnvironmentVariable("TableName", EnvironmentVariableTarget.Process);
+            string storageConnectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
+            CloudStorageAccount storageAccount = CreateStorageAccountFromConnectionString(storageConnectionString);
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient(new TableClientConfiguration());
+            var table = await TableStorageUtils.CreateTableAsync(tableName);
+
+            TableContinuationToken token = null;
+            var entities = new List<RsvpResponse>();
+            do
+            {
+                var queryResult = table.ExecuteQuerySegmented(new TableQuery<RsvpResponse>(), token);
+                entities.AddRange(queryResult.Results);
+                token = queryResult.ContinuationToken;
+            } while (token != null);
+
+            return entities;
+        }
+
         //  <InsertItem>
-        public static async Task<WeddingGuest> InsertOrMergeEntityAsync(CloudTable table, WeddingGuest entity)
+        public static async Task<TableEntity> InsertOrMergeEntityAsync(CloudTable table, TableEntity entity)
         {
             if (entity == null)
             {
