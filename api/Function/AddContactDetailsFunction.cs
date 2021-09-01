@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace JKWedding.Function
 {
-    public static partial class AddWeddingGuestFunction
+    public static partial class JKWeddingFunction
     {
 
         [FunctionName("guests")]
