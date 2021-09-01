@@ -31,27 +31,29 @@ class Main extends React.Component {
         >
           <h2 className="major">How to get there?</h2>
           <span className="image main">
-            <img src={pic01} alt="" />
+            {/* <img src={pic01} alt="" /> */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.286856104298!2d4.777646715802383!3d52.383349979788555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5e39a7c086f75%3A0x52c0a036ece30cab!2shet%20Rijk%20van%20de%20Keizer!5e0!3m2!1sen!2str!4v1630532534979!5m2!1sen!2str"
+              width="100%"
+              height="320"
+              style={{ border: 0 }}
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
           </span>
           <p>
-            Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin
-            aliquam facilisis ante interdum congue. Integer mollis, nisl amet
-            convallis, porttitor magna ullamcorper, amet egestas mauris. Ut
-            magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas.
-            By the way, check out my <a href="#work">awesome work</a>.
+            It's super easy! Het Rijk van de Keizer is only 15 mins by car from
+            Amsterdam Central Station, and only 10 minutes by car from Amsterdam
+            Sloterdijk Station. Easiest way to get there is to take an Uber or
+            taxi.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora
-            torquent per conubia nostra, per inceptos himenaeos. Etiam tristique
-            libero eu nibh porttitor fermentum. Nullam venenatis erat id
-            vehicula viverra. Nunc ultrices eros ut ultricies condimentum.
-            Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae
-            dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in
-            lectus. Pellentesque habitant morbi tristique senectus et netus et
-            malesuada fames ac turpis egestas. In non lorem sit amet elit
-            placerat maximus. Pellentesque aliquam maximus risus, vel sed
-            vehicula.
+            You can click on the map above or hit{' '}
+            <a target="_blank" href="https://g.page/hetRijkvandeKeizer?share">
+              {' '}
+              this link{' '}
+            </a>{' '}
+            to get directions.
           </p>
           {close}
         </article>
@@ -93,24 +95,26 @@ class Main extends React.Component {
           style={{ display: 'none' }}
         >
           <h2 className="major">Contact</h2>
-          <span className="image main">
+          {/* <span className="image main">
             <img src={pic03} alt="" />
-          </span>
+          </span> */}
           <p>
-            Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent
-            eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam
-            erat volutpat. Praesent urna nisi, fringila lorem et vehicula
-            lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.
-            Aliquam libero et malesuada fames ac ante ipsum primis in faucibus.
-            Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit
-            amet.
+            In case you need to ask something that we weren't able to cover
+            here, you may call our lovely ceremony masters.
           </p>
+          <a href="tel:+31624138693">Florrie Walraven</a>
+          <br />
+          <a href="tel:+31634324443">Valentijn Geirnaert</a>
+          <br />
+          <a href="tel:+31641122173">Jamel Pee</a>
+          <br />
           {close}
         </article>
 
         <article
           id="save-the-date"
-          className={`${this.props.article === 'save-the-date' ? 'active' : ''
+          className={`${
+            this.props.article === 'save-the-date' ? 'active' : ''
           } ${this.props.articleTimeout ? 'timeout' : ''}`}
           style={{ display: 'none' }}
         >
