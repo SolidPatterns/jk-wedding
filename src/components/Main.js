@@ -23,13 +23,13 @@ class Main extends React.Component {
         style={this.props.timeout ? { display: 'flex' } : { display: 'none' }}
       >
         <article
-          id="how-to-get-there"
+          id="how-do-i-get-there"
           className={`${
-            this.props.article === 'how-to-get-there' ? 'active' : ''
+            this.props.article === 'how-do-i-get-there' ? 'active' : ''
           } ${this.props.articleTimeout ? 'timeout' : ''}`}
           style={{ display: 'none' }}
         >
-          <h2 className="major">How to get there?</h2>
+          <h2 className="major">How do I get there?</h2>
           <span className="image main">
             {/* <img src={pic01} alt="" /> */}
             <iframe
@@ -42,10 +42,10 @@ class Main extends React.Component {
             ></iframe>
           </span>
           <p>
-            It's super easy! Het Rijk van de Keizer is only 15 minutes from
+            It's super easy by car! Het Rijk van de Keizer is only 15 minutes from
             Amsterdam Central Station, and only 10 minutes from Amsterdam
-            Sloterdijk Station by car. Easiest way to get there is to take an Uber or
-            to hop on a taxi.
+            Sloterdijk Station by car. Easiest way to get there is to take an
+            Uber or to hop on a taxi.
           </p>
           <p>
             You can click on the map above or hit{' '}
@@ -100,14 +100,23 @@ class Main extends React.Component {
           </span> */}
           <p>
             In case you need to ask something that we weren't able to cover
-            here, feel free to give our lovely ceremony masters a call.
+            here, feel free to shoot a mail or give a call to our lovely ceremony masters.
           </p>
-          <a href="tel:+31624138693">Florrie Walraven</a>
-          <br />
-          <a href="tel:+31634324443">Valentijn Geirnaert</a>
-          <br />
-          <a href="tel:+31641122173">Jamel Pee</a>
-          <br />
+          <p>
+            Florrie Walraven 🇳🇱 🇬🇧<br/>
+            <a href="tel:+31624138693">+31624138693</a><br/>
+            <a href="mailto:florriewalraven@gmail.com">florriewalraven@gmail.com</a>
+          </p>
+          <p>
+            Valentijn Geirnaert 🇳🇱 🇬🇧<br/>
+            <a href="tel:+31634324443">+31634324443</a> <br/>
+            <a href="mailto:valentijn.geirnaert@gmail.com">valentijn.geirnaert@gmail.com</a>
+          </p>
+          <p>
+            Jamel Pee 🇬🇧 <br/>
+            <a href="tel:+31641122173">+31641122173</a><br/>
+            <a href="mailto:ajamelpee@gmail.com">ajamelpee@gmail.com</a>
+          </p>
           {close}
         </article>
 

@@ -42,7 +42,7 @@ const Layout = ({ children, location }) => {
             title={data.site.siteMetadata.title}
             meta={[
               { name: 'description', content: 'Joëlle & Kemal Wedding | AMSTERDAM | 13•11•2021' },
-              { name: 'keywords', content: 'joelle-kemal, save-the-date, wedding' },
+              { name: 'keywords', content: 'joelle-kemal, wedding-invitation-rsvp, wedding' },
             ]}
           >
             <html lang="en" />

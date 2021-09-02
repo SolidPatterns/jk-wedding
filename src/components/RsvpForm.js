@@ -90,7 +90,7 @@ class RsvpForm extends React.Component {
           }
         >
           <div className="field">
-          <input
+            <input
               type="radio"
               name="rsvp"
               id="rsvp-yes"
@@ -99,6 +99,8 @@ class RsvpForm extends React.Component {
               required
             />
             <label htmlFor="rsvp-yes">Duh, of course I can make it!</label>
+          </div>
+          <div className="field">
             <input
               type="radio"
               name="rsvp"
@@ -107,7 +109,9 @@ class RsvpForm extends React.Component {
               onChange={this.handleInputChange}
               required
             />
-            <label htmlFor="rsvp-no">I'll regret it my whole life, but I can't make it :'(</label>
+            <label htmlFor="rsvp-no">
+              I'll regret it my whole life, but I can't make it :'(
+            </label>
           </div>
           <div className="field">
             <label htmlFor="name">Your name</label>
@@ -189,13 +193,16 @@ class RsvpForm extends React.Component {
               maxlength="1000"
             ></textarea>
           </div>
-          <input type="submit" value="Submit" className="special" disabled={this.state.misc.disableSubmission}/>
+          <input
+            type="submit"
+            value="Submit"
+            className="special"
+            disabled={this.state.misc.disableSubmission}
+          />
         </form>
         <div className={this.state.misc.submitted ? '' : 'hide'}>
-          <p>
-            {this.state.misc.successfullMessage}
-          </p>
-          <img src={thankYouCaillou} alt="thank you by Caillou"/>
+          <p>{this.state.misc.successfullMessage}</p>
+          <img src={thankYouCaillou} alt="thank you by Caillou" />
         </div>
         <p className={this.state.errors.hasErrors ? '' : 'hide'}>
           {this.state.errors.errorMessage}

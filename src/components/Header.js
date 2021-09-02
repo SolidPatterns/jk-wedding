@@ -21,21 +21,15 @@ const Header = props => (
     <nav>
       <ul>
         <li>
-          <button
-            onClick={() => {
-              props.onOpenArticle('rsvp')
-            }}
-          >
-            RSVP
-          </button>
+          <button onClick={() => {props.onOpenArticle('rsvp')}}>RSVP Here!</button>
         </li>
         <li>
           <button
             onClick={() => {
-              props.onOpenArticle('how-to-get-there')
+              props.onOpenArticle('how-do-i-get-there')
             }}
           >
-            How to get there?
+            How do I get there?
           </button>
         </li>
         {/* <li>
@@ -53,7 +47,7 @@ const Header = props => (
               props.onOpenArticle('contact')
             }}
           >
-            Contact
+            Gotta contact us?
           </button>
         </li>
       </ul>
