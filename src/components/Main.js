@@ -37,7 +37,7 @@ class Main extends React.Component {
               width="100%"
               height="320"
               style={{ border: 0 }}
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
             ></iframe>
           </span>
@@ -100,22 +100,25 @@ class Main extends React.Component {
           </span> */}
           <p>
             In case you need to ask something that we weren't able to cover
-            here, feel free to shoot a mail or give a call to our lovely ceremony masters.
+            here, feel free to shoot a mail or give a ring to our lovely ceremony masters.
+          </p>
+          <p>
+          <a href="mailto:ceremoniemeestersjoellekemal@gmail.com"> Head here</a> to shoot our ceremony masters an e-mail!
+          </p>
+          <p>
+            Or give them a good old fashioned ring 😉<br/>
           </p>
           <p>
             Florrie Walraven 🇳🇱 🇬🇧<br/>
             <a href="tel:+31624138693">+31624138693</a><br/>
-            <a href="mailto:florriewalraven@gmail.com">florriewalraven@gmail.com</a>
           </p>
           <p>
             Valentijn Geirnaert 🇳🇱 🇬🇧<br/>
             <a href="tel:+31634324443">+31634324443</a> <br/>
-            <a href="mailto:valentijn.geirnaert@gmail.com">valentijn.geirnaert@gmail.com</a>
           </p>
           <p>
             Jamel Pee 🇬🇧 <br/>
             <a href="tel:+31641122173">+31641122173</a><br/>
-            <a href="mailto:ajamelpee@gmail.com">ajamelpee@gmail.com</a>
           </p>
           {close}
         </article>

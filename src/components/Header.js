@@ -11,17 +11,24 @@ const Header = props => (
         <h1>Joëlle & Kemal</h1>
         <p>Invite you to celebrate their love and wedding</p>
         <p>
-          <b><time datetime="2021-11-13">13•November•2021</time></b>
-          <div>Het Rijk van de Keizer</div>
-          <div>Amsterdam</div>
+          <b>
+            <time dateTime="2021-11-13">13•November•2021</time>
+          </b>
         </p>
-        <p></p>
+        <p>Het Rijk van de Keizer</p>
+        <p>Amsterdam</p>
       </div>
     </div>
     <nav>
       <ul>
         <li>
-          <button onClick={() => {props.onOpenArticle('rsvp')}}>RSVP Here!</button>
+          <button
+            onClick={() => {
+              props.onOpenArticle('rsvp')
+            }}
+          >
+            RSVP Here!
+          </button>
         </li>
         <li>
           <button

@@ -121,7 +121,7 @@ class RsvpForm extends React.Component {
               id="name"
               value={this.state.fields.name || ''}
               onChange={this.handleInputChange}
-              maxlength="75"
+              maxLength="75"
               required
             />
           </div>
@@ -133,7 +133,7 @@ class RsvpForm extends React.Component {
               id="secondName"
               value={this.state.fields.secondName || ''}
               onChange={this.handleInputChange}
-              maxlength="75"
+              maxLength="75"
             />
           </div>
           <div className="field">
@@ -144,7 +144,7 @@ class RsvpForm extends React.Component {
               id="email"
               value={this.state.fields.email || ''}
               onChange={this.handleInputChange}
-              maxlength="100"
+              maxLength="100"
               required
             />
           </div>
@@ -156,7 +156,7 @@ class RsvpForm extends React.Component {
               id="mobileNumber"
               value={this.state.fields.mobileNumber || ''}
               onChange={this.handleInputChange}
-              maxlength="50"
+              maxLength="50"
               required
             />
           </div>
@@ -168,7 +168,7 @@ class RsvpForm extends React.Component {
               rows="4"
               value={this.state.fields.song || ''}
               onChange={this.handleInputChange}
-              maxlength="1000"
+              maxLength="1000"
             ></textarea>
           </div>
           <div className="field">
@@ -179,7 +179,7 @@ class RsvpForm extends React.Component {
               rows="4"
               value={this.state.fields.dietary || ''}
               onChange={this.handleInputChange}
-              maxlength="1000"
+              maxLength="1000"
             ></textarea>
           </div>
           <div className="field">
@@ -190,7 +190,7 @@ class RsvpForm extends React.Component {
               rows="4"
               value={this.state.fields.message || ''}
               onChange={this.handleInputChange}
-              maxlength="1000"
+              maxLength="1000"
             ></textarea>
           </div>
           <input

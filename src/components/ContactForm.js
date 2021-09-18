@@ -97,7 +97,7 @@ class ContactForm extends React.Component {
               id="name"
               value={this.state.fields.name || ''}
               onChange={this.handleInputChange}
-              maxlength="75"
+              maxLength="75"
               required
             />
           </div>
@@ -109,7 +109,7 @@ class ContactForm extends React.Component {
               id="secondName"
               value={this.state.fields.secondName || ''}
               onChange={this.handleInputChange}
-              maxlength="75"
+              maxLength="75"
             />
           </div>
           <div className="field">
@@ -120,7 +120,7 @@ class ContactForm extends React.Component {
               id="email"
               value={this.state.fields.email || ''}
               onChange={this.handleInputChange}
-              maxlength="100"
+              maxLength="100"
               required
             />
           </div>
@@ -132,7 +132,7 @@ class ContactForm extends React.Component {
               id="mobileNumber"
               value={this.state.fields.mobileNumber || ''}
               onChange={this.handleInputChange}
-              maxlength="50"
+              maxLength="50"
               required
             />
           </div>
@@ -161,7 +161,7 @@ class ContactForm extends React.Component {
               id="city"
               value={this.state.fields.city || ''}
               onChange={this.handleInputChange}
-              maxlength="100"
+              maxLength="100"
               required
             />
           </div>
@@ -173,7 +173,7 @@ class ContactForm extends React.Component {
               id="postCode"
               value={this.state.fields.postCode || ''}
               onChange={this.handleInputChange}
-              maxlength="15"
+              maxLength="15"
               required
             />
           </div>
@@ -185,7 +185,7 @@ class ContactForm extends React.Component {
               rows="4"
               value={this.state.fields.address || ''}
               onChange={this.handleInputChange}
-              maxlength="250"
+              maxLength="250"
               required
             ></textarea>
           </div>
@@ -197,7 +197,7 @@ class ContactForm extends React.Component {
               rows="4"
               value={this.state.fields.message || ''}
               onChange={this.handleInputChange}
-              maxlength="1000"
+              maxLength="1000"
             ></textarea>
           </div>
           <input type="submit" value="Submit" className="special" disabled={this.state.misc.disableSubmission}/>
