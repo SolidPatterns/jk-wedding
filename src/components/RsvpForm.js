@@ -98,7 +98,7 @@ class RsvpForm extends React.Component {
               onChange={this.handleInputChange}
               required
             />
-            <label htmlFor="rsvp-yes">Duh, of course I can make it!</label>
+            <label htmlFor="rsvp-yes">Duh, wouldn't miss it for the world! 🥳</label>
           </div>
           <div className="field">
             <input
@@ -110,7 +110,7 @@ class RsvpForm extends React.Component {
               required
             />
             <label htmlFor="rsvp-no">
-              I'll regret it my whole life, but I can't make it :'(
+              I'll regret it my whole life, but I can't make it. 😢
             </label>
           </div>
           <div className="field">
@@ -183,7 +183,7 @@ class RsvpForm extends React.Component {
             ></textarea>
           </div>
           <div className="field">
-            <label htmlFor="message">I have something more to tell!</label>
+            <label htmlFor="message">I'm dying to tell you (J&K) something more!</label>
             <textarea
               name="message"
               id="message"

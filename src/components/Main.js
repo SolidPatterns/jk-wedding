@@ -41,10 +41,11 @@ class Main extends React.Component {
               loading="lazy"
             ></iframe>
           </span>
+          <h3>Getting there</h3>
           <p>
-            It's super easy by car! Het Rijk van de Keizer is only 15 minutes from
-            Amsterdam Central Station, and only 10 minutes from Amsterdam
-            Sloterdijk Station by car. Easiest way to get there is to take an
+            It's super easy by car! Het Rijk van de Keizer is only 15 minutes
+            from Amsterdam Central Station and only 10 minutes from Amsterdam
+            Sloterdijk Station by car. The easiest way to get there is to take an
             Uber or to hop on a taxi.
           </p>
           <p>
@@ -54,6 +55,15 @@ class Main extends React.Component {
               this link{' '}
             </a>{' '}
             to get directions.
+          </p>
+          <h3>Getting back</h3>
+          <p>
+            OK, let's be honest, you'll be drunk, so the easiest would be to take an Uber. 
+            Alternatively, you can sort it out with the taxi company near the venue. 
+            They're called <b>TOSTAXI</b>. <br /><br />
+            <a type="_blank" href="https://wa.me/31615318318">WhatsApp</a> <br />
+            <a type="tel" href="+31204971393">Phone</a> <br />
+            <a type="_blank" href="https://www.tostaxi.com/">www.tostaxi.com</a>
           </p>
           {close}
         </article>
@@ -100,25 +110,34 @@ class Main extends React.Component {
           </span> */}
           <p>
             In case you need to ask something that we weren't able to cover
-            here, feel free to shoot a mail or give a ring to our lovely ceremony masters.
+            here, feel free to shoot a mail or give a ring to our lovely
+            ceremony masters.
           </p>
           <p>
-          <a href="mailto:ceremoniemeestersjoellekemal@gmail.com"> Head here</a> to shoot our ceremony masters an e-mail!
+            Shoot our ceremony masters an e-mail: <br /> <a href="mailto:ceremoniemeestersjoellekemal@gmail.com">
+              {' '}
+              ceremoniemeestersjoellekemal@gmail.com
+            </a>{' '}
           </p>
           <p>
-            Or give them a good old fashioned ring 😉<br/>
+            Or give them a good old fashioned ring 😉
+            <br />
           </p>
           <p>
-            Florrie Walraven 🇳🇱 🇬🇧<br/>
-            <a href="tel:+31624138693">+31624138693</a><br/>
+            Florrie Walraven 🇳🇱 🇬🇧
+            <br />
+            <a href="tel:+31624138693">+31624138693</a>
+            <br />
           </p>
           <p>
-            Valentijn Geirnaert 🇳🇱 🇬🇧<br/>
-            <a href="tel:+31634324443">+31634324443</a> <br/>
+            Valentijn Geirnaert 🇳🇱 🇬🇧
+            <br />
+            <a href="tel:+31634324443">+31634324443</a> <br />
           </p>
           <p>
-            Jamel Pee 🇬🇧 <br/>
-            <a href="tel:+31641122173">+31641122173</a><br/>
+            Jamel Pee 🇬🇧 <br />
+            <a href="tel:+31641122173">+31641122173</a>
+            <br />
           </p>
           {close}
         </article>
