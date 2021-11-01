@@ -93,10 +93,6 @@
         }
       }
     }
-
-    .hide {
-      display: none;
-    }
   }
 
   @include breakpoint(small) {

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 
 class PhotosForm extends React.Component {
