@@ -167,7 +167,7 @@ class Main extends React.Component {
           {close}
         </article>
 
-        {/* <article
+        <article
           id="photos"
           className={`${this.props.article === 'photos' ? 'active' : ''} ${
             this.props.articleTimeout ? 'timeout' : ''
@@ -177,7 +177,7 @@ class Main extends React.Component {
           <h2 className="major">Upload Photos</h2>
           <PhotosForm></PhotosForm>
           {close}
-        </article> */}
+        </article>
       </div>
     )
   }

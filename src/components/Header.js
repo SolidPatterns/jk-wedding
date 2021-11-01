@@ -39,7 +39,7 @@ const Header = props => (
             How do I get there?
           </button>
         </li>
-        <li>
+        {/* <li>
           <button
             onClick={() => {
               props.onOpenArticle('photos')
@@ -47,7 +47,7 @@ const Header = props => (
           >
             Upload photos
           </button>
-        </li>
+        </li> */}
         <li>
           <button
             onClick={() => {
