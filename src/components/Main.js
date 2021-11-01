@@ -5,6 +5,7 @@ import pic02 from '../images/pic02.jpg'
 import pic03 from '../images/pic03.jpg'
 import RsvpForm from './RsvpForm'
 import ContactForm from './ContactForm'
+import PhotosForm from './PhotosForm'
 class Main extends React.Component {
   render() {
     let close = (
@@ -163,6 +164,18 @@ class Main extends React.Component {
         >
           <h2 className="major">RSVP</h2>
           <RsvpForm></RsvpForm>
+          {close}
+        </article>
+
+        <article
+          id="photos"
+          className={`${this.props.article === 'photos' ? 'active' : ''} ${
+            this.props.articleTimeout ? 'timeout' : ''
+          }`}
+          style={{ display: 'none' }}
+        >
+          <h2 className="major">Upload Photos</h2>
+          <PhotosForm></PhotosForm>
           {close}
         </article>
       </div>
