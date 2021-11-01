@@ -59,6 +59,9 @@ namespace JKWedding.Function
 
                 foreach (var file in req.Form.Files)
                 {
+                    if(file.ContentType != System.Net.Mime.MediaTypeNames.Image.Jpeg) {
+                        continue;
+                    }
                     // Get a reference to a blob
                     BlobClient blobClient = containerClient.GetBlobClient(Guid.NewGuid().ToString());
                     using (var stream = file.OpenReadStream())
