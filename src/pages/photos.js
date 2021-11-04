@@ -9,7 +9,7 @@ const SecondPage = () => (
     <h1>Upload Photos</h1>
 
     <PhotosForm />
-{process.env.GATSBY_TEST}
+    
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )

@@ -1,7 +1,7 @@
 import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 class PhotosForm extends React.Component {
   constructor(props) {
@@ -24,7 +24,10 @@ class PhotosForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fileInput = React.createRef()
-    this.blobStorageService = new BlobStorageService(process.env.GATSBY_ACCOUNT_NAME, process.env.GATSBY_SAS)
+    this.blobStorageService = new BlobStorageService(
+      process.env.GATSBY_ACCOUNT_NAME,
+      process.env.GATSBY_SAS
+    )
   }
 
   handleInputChange(event) {
@@ -51,9 +54,9 @@ class PhotosForm extends React.Component {
       return
     }
 
-   
     // Create a blob
     for (let i = 0; i < this.fileInput.current.files.length; i++) {
+      this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
       let content = this.fileInput.current.files[i]
       let blobName = `${uuidv4()}_${new Date().getTime()}`
       let blockBlobClient = this.blobStorageService.getBlockBlobClient(blobName)
@@ -66,6 +69,7 @@ class PhotosForm extends React.Component {
         uploadBlobResponse.requestId
       )
     }
+    this.handleSuccess();
 
     // this.blobStorageService.getBlockBlobClient()
     // this.blobStorageService.uploadBlobs(this.fileInput.current.files)
@@ -110,11 +114,23 @@ class PhotosForm extends React.Component {
     //   })
   }
 
+  handleUploadUpdate = (current, total) => {
+    let misc = this.state.misc
+    misc.submit = `Uploading ${current} in ${total}...`
+    this.setState({ misc })
+  }
+
+  handleSuccess = () => {
+    let misc = this.state.misc
+    misc.submitted = true
+    this.setState({ misc })
+  }
+
   handleSubmit(event) {
     console.log('Submitted: ' + JSON.stringify(this.state.fields))
     let misc = this.state.misc
     misc.disableSubmission = true
-    misc.submit = "Wait for it... Don't go anywhere until you see our cat."
+    misc.submit = 'Wait for it...'
     this.setState({ misc })
     this.submitPhotos(this.state.fields)
     event.preventDefault()
