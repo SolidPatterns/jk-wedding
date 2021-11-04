@@ -6,7 +6,6 @@
 */
 
 const { BlobServiceClient } = require('@azure/storage-blob')
-const { v4: uuidv4 } = require('uuid')
 
 // Load the .env file if it exists
 // require("dotenv").config();
@@ -19,10 +18,10 @@ class BlobStorageService {
     this.sas = sas
   }
 
-  async uploadBlobs(files) {
-    if (!files) {
-      throw 'files cannot be null.'
-    }
+  getBlockBlobClient(blobName) {
+      if(!blobName) {
+          throw "blobname cannot be null or empty.";
+      }
     // Enter your storage account name and shared key
     //   const account = process.env.GATSBY_ACCOUNT_NAME || ''
     //   const sas =
@@ -58,21 +57,22 @@ class BlobStorageService {
     // Create a container
     const containerName = 'jk-wedding-photos'
     const containerClient = blobServiceClient.getContainerClient(containerName)
-
-    // Create a blob
-    for (let i = 0; i < files.length; i++) {
-      let content = files[i]
-      let blobName = `${uuidv4()}_${new Date().getTime()}`
-      let blockBlobClient = containerClient.getBlockBlobClient(blobName)
-      let uploadBlobResponse = await blockBlobClient.upload(
-        content,
-        Buffer.byteLength(content)
-      )
-      console.log(
-        `Upload block blob ${blobName} successfully`,
-        uploadBlobResponse.requestId
-      )
-    }
+    return containerClient.getBlockBlobClient(blobName);
+      
+    // // Create a blob
+    // for (let i = 0; i < files.length; i++) {
+    //   let content = files[i]
+    //   let blobName = `${uuidv4()}_${new Date().getTime()}`
+    //   let blockBlobClient = containerClient.getBlockBlobClient(blobName)
+    //   let uploadBlobResponse = await blockBlobClient.upload(
+    //     content,
+    //     Buffer.byteLength(content)
+    //   )
+    //   console.log(
+    //     `Upload block blob ${blobName} successfully`,
+    //     uploadBlobResponse.requestId
+    //   )
+    // }
   }
 }
 export default BlobStorageService

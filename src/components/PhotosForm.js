@@ -1,6 +1,7 @@
 import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
+import {v4 as uuidv4} from 'uuid';
 
 class PhotosForm extends React.Component {
   constructor(props) {
@@ -46,19 +47,36 @@ class PhotosForm extends React.Component {
   async submitPhotos() {
     console.log('submitPhotos():')
 
-    if (this.fileInput.current.files.length == 0) {
+    if (this.fileInput.current.files.length === 0) {
       return
     }
 
-    this.blobStorageService.uploadBlobs(this.fileInput.current.files)
-      .then(() => {
-        let misc = this.state.misc
-        misc.submitted = true
-        this.setState({ misc })
-      })
-      .catch(error => {
-        this.handleError(error)
-      })
+   
+    // Create a blob
+    for (let i = 0; i < this.fileInput.current.files.length; i++) {
+      let content = this.fileInput.current.files[i]
+      let blobName = `${uuidv4()}_${new Date().getTime()}`
+      let blockBlobClient = this.blobStorageService.getBlockBlobClient(blobName)
+      let uploadBlobResponse = await blockBlobClient.upload(
+        content,
+        Buffer.byteLength(content)
+      )
+      console.log(
+        `Upload block blob ${blobName} successfully`,
+        uploadBlobResponse.requestId
+      )
+    }
+
+    // this.blobStorageService.getBlockBlobClient()
+    // this.blobStorageService.uploadBlobs(this.fileInput.current.files)
+    //   .then(() => {
+    //     let misc = this.state.misc
+    //     misc.submitted = true
+    //     this.setState({ misc })
+    //   })
+    //   .catch(error => {
+    //     this.handleError(error)
+    //   })
 
     // var data = new FormData()
 
