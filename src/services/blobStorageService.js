@@ -18,10 +18,27 @@ class BlobStorageService {
     this.sas = sas
   }
 
+  // exampple usage of this method
+  // Create a blob
+  // for (let i = 0; i < this.fileInput.current.files.length; i++) {
+  //   this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
+  //   let content = this.fileInput.current.files[i]
+  //   let blobName = `${uuidv4()}_${new Date().getTime()}`
+  //   let blockBlobClient = this.blobStorageService.getBlockBlobClient(blobName)
+  //   let uploadBlobResponse = await blockBlobClient.upload(
+  //     content,
+  //     Buffer.byteLength(content)
+  //   )
+  //   console.log(
+  //     `Upload block blob ${blobName} successfully`,
+  //     uploadBlobResponse.requestId
+  //   )
+  // }
+  // this.handleSuccess();
   getBlockBlobClient(blobName) {
-      if(!blobName) {
-          throw "blobname cannot be null or empty.";
-      }
+    if (!blobName) {
+      throw 'blobname cannot be null or empty.'
+    }
     // Enter your storage account name and shared key
     //   const account = process.env.GATSBY_ACCOUNT_NAME || ''
     //   const sas =
@@ -57,8 +74,8 @@ class BlobStorageService {
     // Create a container
     const containerName = 'jk-wedding-photos'
     const containerClient = blobServiceClient.getContainerClient(containerName)
-    return containerClient.getBlockBlobClient(blobName);
-      
+    return containerClient.getBlockBlobClient(blobName)
+
     // // Create a blob
     // for (let i = 0; i < files.length; i++) {
     //   let content = files[i]

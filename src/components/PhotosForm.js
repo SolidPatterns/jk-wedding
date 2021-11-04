@@ -2,7 +2,7 @@ import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
 
-const maxContentLength = 10485760;
+const maxContentLength = 10485760
 class PhotosForm extends React.Component {
   constructor(props) {
     super(props)
@@ -54,30 +54,13 @@ class PhotosForm extends React.Component {
       return
     }
 
-    // Create a blob
-    // for (let i = 0; i < this.fileInput.current.files.length; i++) {
-    //   this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
-    //   let content = this.fileInput.current.files[i]
-    //   let blobName = `${uuidv4()}_${new Date().getTime()}`
-    //   let blockBlobClient = this.blobStorageService.getBlockBlobClient(blobName)
-    //   let uploadBlobResponse = await blockBlobClient.upload(
-    //     content,
-    //     Buffer.byteLength(content)
-    //   )
-    //   console.log(
-    //     `Upload block blob ${blobName} successfully`,
-    //     uploadBlobResponse.requestId
-    //   )
-    // }
-    // this.handleSuccess();
- 
     for (let i = 0; i < this.fileInput.current.files.length; i++) {
       this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
       if (this.fileInput.current.files[i].length >= maxContentLength) {
         console.error('Max content limit exceeded.')
         continue
       }
-      let data = new FormData();
+      let data = new FormData()
       data.append('file' + i, this.fileInput.current.files[i])
 
       let response = await fetch('/api/photos', {
@@ -86,8 +69,11 @@ class PhotosForm extends React.Component {
         mode: 'cors',
       })
       if (!response.ok) {
+        console.error(response)
         this.handleError(response)
-        break;
+        break
+      } else {
+        console.log(`file ${i+1} uploaded successfully.`, this.fileInput.current.files[i])
       }
     }
     this.handleSuccess()
