@@ -1,5 +1,6 @@
 import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
+import BlobStorageService from '../services/blobStorageService'
 
 class PhotosForm extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class PhotosForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fileInput = React.createRef()
+    this.blobStorageService = new BlobStorageService(process.env.GATSBY_ACCOUNT_NAME, process.env.GATSBY_SAS)
   }
 
   handleInputChange(event) {
@@ -43,29 +45,51 @@ class PhotosForm extends React.Component {
 
   async submitPhotos() {
     console.log('submitPhotos():')
-    var data = new FormData()
-    for (let i = 0; i < this.fileInput.current.files.length; i++) {
-      data.append('file' + i, this.fileInput.current.files[i])
+
+    if (this.fileInput.current.files.length == 0) {
+      return
     }
-    return fetch('/api/photos', {
-      method: 'POST',
-      body: data,
-      mode: 'cors',
-    })
-      .then(response => {
-        if (!response.ok) {
-          this.handleError(response)
-        }
-        if (response.ok) {
-          let misc = this.state.misc
-          misc.submitted = true
-          this.setState({ misc })
-        }
-        return
+
+    this.blobStorageService.uploadBlobs(this.fileInput.current.files)
+      .then(() => {
+        let misc = this.state.misc
+        misc.submitted = true
+        this.setState({ misc })
       })
       .catch(error => {
         this.handleError(error)
       })
+
+    // var data = new FormData()
+
+    // let currentContentLength = 0
+    // for (let i = 0; i < this.fileInput.current.files.length; i++) {
+    //   data.append('file' + i, this.fileInput.current.files[i])
+    //   currentContentLength += this.fileInput.current.files[i].length
+    // }
+    // if (currentContentLength >= maxContentLength) {
+    //   this.handleError('Max content limit exceeded.')
+    //   return
+    // }
+    // return fetch('/api/photos', {
+    //   method: 'POST',
+    //   body: data,
+    //   mode: 'cors',
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       this.handleError(response)
+    //     }
+    //     if (response.ok) {
+    //       let misc = this.state.misc
+    //       misc.submitted = true
+    //       this.setState({ misc })
+    //     }
+    //     return
+    //   })
+    //   .catch(error => {
+    //     this.handleError(error)
+    //   })
   }
 
   handleSubmit(event) {
@@ -81,11 +105,13 @@ class PhotosForm extends React.Component {
   render() {
     return (
       <div>
-        <p className={
+        <p
+          className={
             !this.state.misc.submitted && !this.state.errors.hasErrors
               ? ''
               : 'hide'
-          }>
+          }
+        >
           We know you have a gold mine of amazing photos. We'd love to have
           those too 😁 <br />
           It's super duper easy.
