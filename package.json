@@ -31,7 +31,6 @@
     "deploy": "gatsby build && gh-pages -d public -b gh-pages"
   },
   "devDependencies": {
-    "dotenv-webpack": "^7.0.3",
     "gh-pages": "^3.1.0",
     "prettier": "^1.19.1"
   },
