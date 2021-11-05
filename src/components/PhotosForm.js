@@ -1,18 +1,30 @@
 import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
+import Loading from '../assets/Infinity-1s-200px.svg'
 
-const MAX_CONTENT_LENGTH = 104857600;
+const MAX_CONTENT_LENGTH = 104857600
 class PhotosForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
+    this.state = this.initiateState()
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleReloadClick = this.handleReloadClick.bind(this)
+    this.fileInput = React.createRef()
+  }
+
+  initiateState = () => {
+    return {
       fields: {},
       misc: {
         submitted: false,
         disableSubmission: false,
         successfullMessage: "Lovely! We've got it, thank you ♡ Joëlle & Kemal",
-        submit: 'Upload those goodies!',
+        submitButtonValue: 'Upload those goodies!',
+        uploadProgress: '',
+        uploading: false,
       },
       errors: {
         hasErrors: false,
@@ -20,14 +32,6 @@ class PhotosForm extends React.Component {
           'Oops.. Something wrong happened! Maybe you should try with less photos max 10-15 at a time? Thanks ;)',
       },
     }
-
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.fileInput = React.createRef()
-    this.blobStorageService = new BlobStorageService(
-      process.env.GATSBY_ACCOUNT_NAME,
-      process.env.GATSBY_SAS
-    )
   }
 
   handleInputChange(event) {
@@ -38,6 +42,12 @@ class PhotosForm extends React.Component {
     let fields = this.state.fields
     fields[name] = value
     this.setState({ fields })
+  }
+
+  handleReloadClick(event) {
+    event.preventDefault()
+    this.setState(this.initiateState())
+    this.fileInput.current.value = ""
   }
 
   handleError(error) {
@@ -54,15 +64,17 @@ class PhotosForm extends React.Component {
       return
     }
 
+    this.toggleUploadingState(true)
+
     for (let i = 0; i < this.fileInput.current.files.length; i++) {
       this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
-      
-      let currentFile = this.fileInput.current.files[i];
+
+      let currentFile = this.fileInput.current.files[i]
       if (currentFile.size >= MAX_CONTENT_LENGTH) {
         console.error('Max content limit exceeded.')
         continue
       }
-      if(currentFile.type !== "image/jpeg") {
+      if (currentFile.type !== 'image/jpeg') {
         console.error('unsupported content type.')
         continue
       }
@@ -80,19 +92,26 @@ class PhotosForm extends React.Component {
         this.handleError(response)
         break
       } else {
-        console.log(`file ${i+1} uploaded successfully.`, currentFile)
+        console.log(`file ${i + 1} uploaded successfully.`, currentFile)
       }
     }
     this.handleSuccess()
   }
 
+  toggleUploadingState = toggle => {
+    let misc = this.state.misc
+    misc.uploading = toggle
+    this.setState({ misc })
+  }
+
   handleUploadUpdate = (current, total) => {
     let misc = this.state.misc
-    misc.submit = `Uploading ${current} in ${total}...`
+    misc.uploadProgress = `Uploading ${current} in ${total}...`
     this.setState({ misc })
   }
 
   handleSuccess = () => {
+    this.toggleUploadingState(false)
     let misc = this.state.misc
     misc.submitted = true
     this.setState({ misc })
@@ -102,7 +121,7 @@ class PhotosForm extends React.Component {
     console.log('Submitted: ' + JSON.stringify(this.state.fields))
     let misc = this.state.misc
     misc.disableSubmission = true
-    misc.submit = 'Wait for it...'
+    misc.submitButtonValue = 'Wait for it...'
     this.setState({ misc })
     this.submitPhotos(this.state.fields).catch(error => {
       this.handleError(error)
@@ -154,18 +173,40 @@ class PhotosForm extends React.Component {
           </div>
           <input
             type="submit"
-            value={this.state.misc.submit}
+            value={this.state.misc.submitButtonValue}
             className="special"
             disabled={this.state.misc.disableSubmission}
           />
         </form>
+
+        <div className={this.state.misc.uploading ? '' : 'hide'}>
+          <p>
+            <b>{this.state.misc.uploadProgress}</b>
+          </p>
+          <span role="img">
+            <img src={Loading} alt="uploading..." />
+          </span>
+        </div>
+
         <div className={this.state.misc.submitted ? '' : 'hide'}>
           <p>{this.state.misc.successfullMessage}</p>
           <img src={thankYouCaillou} alt="thank you by Caillou" />
+          <br/>
+          <a href=""
+            onClick={this.handleReloadClick}
+          >
+            Want to upload more?
+          </a>
         </div>
-        <p className={this.state.errors.hasErrors ? '' : 'hide'}>
-          {this.state.errors.errorMessage}
-        </p>
+        <div className={this.state.errors.hasErrors ? '' : 'hide'}>
+          <p>{this.state.errors.errorMessage}</p>
+          <br/>
+          <a href=""
+            onClick={this.handleReloadClick}
+          >
+            Shall we try again?
+          </a>
+        </div>
       </div>
     )
   }
