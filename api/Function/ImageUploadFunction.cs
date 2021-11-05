@@ -13,8 +13,6 @@ namespace JKWedding.Function
 {
     public static partial class JKWeddingFunction
     {
-        public static readonly int BufferSize = 4096;
-
         [FunctionName("photos")]
         public static async Task<IActionResult> PostPhotos(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", "get", Route = null)] HttpRequest req,
