@@ -7,13 +7,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace JKWedding.Function
 {
     public static partial class JKWeddingFunction
     {
-        public static readonly int BufferSize = 4096;
-
         [FunctionName("photos")]
         public static async Task<IActionResult> PostPhotos(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", "get", Route = null)] HttpRequest req,
@@ -21,99 +20,53 @@ namespace JKWedding.Function
         {
             log.LogInformation("photos function processed a request.");
 
+            if (!HttpMethods.IsPost(req.Method))
+            {
+                return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
+            }
+
             var connectionString = System.Environment.GetEnvironmentVariable("TableStorageConnectionString", EnvironmentVariableTarget.Process);
             if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new NullReferenceException("Connection string cannot be null");
             }
-            // if (HttpMethods.IsGet(req.Method))
-            // {
-            //     if (!req.GetQueryParameterDictionary().TryGetValue("key", out string key))
-            //     {
-            //         return new UnauthorizedResult();
-            //     }
 
-            //     string keyToCheck = System.Environment.GetEnvironmentVariable("Key", EnvironmentVariableTarget.Process);
-            //     if (!key.Equals(keyToCheck, StringComparison.OrdinalIgnoreCase))
-            //     {
-            //         return new UnauthorizedResult();
-            //     }
-
-            //     var guests = await TableStorageUtils.RetrieveAllRsvpsAsync(rsvpsTableName);
-            //     return new OkObjectResult(guests.OrderByDescending(x => x.Timestamp));
-            // }
-
-            if (HttpMethods.IsPost(req.Method))
+            var form = await req.ReadFormAsync();
+            if (!req.Form.Files.Any())
             {
-                // Uri uri = await UploadBlobAsync(photoBase64String);
-                // return req.CreateResponse(HttpStatusCode.Accepted, uri);
-                var form = await req.ReadFormAsync();
-                if (!req.Form.Files.Any())
-                {
-                    return new BadRequestObjectResult("No files selected.");
-                }
-                // Create a BlobServiceClient object which will be used to create a container client
-                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-                // Create the container and return a container client object
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("jk-wedding-photos");
-
-                foreach (var file in req.Form.Files)
-                {
-                    if(file.ContentType != System.Net.Mime.MediaTypeNames.Image.Jpeg) {
-                        continue;
-                    }
-                    // Get a reference to a blob
-                    BlobClient blobClient = containerClient.GetBlobClient(Guid.NewGuid().ToString());
-                    using (var stream = file.OpenReadStream())
-                    {
-                        await blobClient.UploadAsync(stream);
-                    }
-                    // using (var stream = file.OpenReadStream())
-                    // {
-                    //     byte[] buffer = new byte[file.Length];
-                    //     var totalBtyes = file.Length;
-
-                    //     var read = await stream.ReadAsync(buffer, 0, buffer.Length);
-                    //     await imageUploaded.WriteAsync(buffer, 0, read);
-                    // }
-                }
-
-                return new OkObjectResult(req.Form.Files.Count + " files have been successfull uploaded.");
+                return new BadRequestObjectResult("No files selected.");
             }
 
-            return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
+            if (req.Form.Files.Count > 1)
+            {
+                return new BadRequestObjectResult("You cannot upload more than 1 file at a time.");
+            }
+            
+            var file = req.Form.Files[0];
+            if (file.ContentType != System.Net.Mime.MediaTypeNames.Image.Jpeg)
+            {
+                return new StatusCodeResult(StatusCodes.Status415UnsupportedMediaType);
+            }
+
+            string blobName = await UploadBlob(connectionString, file);
+            return new OkObjectResult($"Uploaded blob {blobName} successfully.");
         }
 
-        //     private static async Task Rsvp(RsvpResponse data, string tableName)
-        //     {
-        //         if (data == null) return;
-
-        //         var table = await TableStorageUtils.CreateTableAsync(tableName);
-        //         await TableStorageUtils.InsertOrMergeEntityAsync(table, data.Normalize());
-        //     }
-
-        //     public static async Task<bool> UploadFileToStorage(Stream fileStream, string fileName,
-        //                                                 AzureStorageConfig _storageConfig)
-        //     {
-        //         // Create a URI to the blob
-        //         Uri blobUri = new Uri("https://" +
-        //                               _storageConfig.AccountName +
-        //                               ".blob.core.windows.net/" +
-        //                               _storageConfig.ImageContainer +
-        //                               "/" + fileName);
-
-        //         // Create StorageSharedKeyCredentials object by reading
-        //         // the values from the configuration (appsettings.json)
-        //         StorageSharedKeyCredential storageCredentials =
-        //             new StorageSharedKeyCredential(_storageConfig.AccountName, _storageConfig.AccountKey);
-
-        //         // Create the blob client.
-        //         BlobClient blobClient = new BlobClient(blobUri, storageCredentials);
-
-        //         // Upload the file
-        //         await blobClient.UploadAsync(fileStream);
-
-        //         return await Task.FromResult(true);
-        //     }
+        private static async Task<string> UploadBlob(string connectionString, IFormFile file)
+        {
+            // Create a BlobServiceClient object which will be used to create a container client
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+            // Create the container and return a container client object
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("jk-wedding-photos");
+            // Get a reference to a blob
+            string blobName = $"{Guid.NewGuid().ToString()}.jpeg";
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+            BlobContentInfo response = null;
+            using (var stream = file.OpenReadStream())
+            {
+                response = await blobClient.UploadAsync(stream);
+            }
+            return blobName;
+        }
     }
 }
