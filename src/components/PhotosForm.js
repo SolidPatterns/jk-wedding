@@ -2,7 +2,7 @@ import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
 
-const maxContentLength = 104857600;
+const MAX_CONTENT_LENGTH = 104857600;
 class PhotosForm extends React.Component {
   constructor(props) {
     super(props)
@@ -58,7 +58,7 @@ class PhotosForm extends React.Component {
       this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
       
       let currentFile = this.fileInput.current.files[i];
-      if (currentFile.size >= maxContentLength) {
+      if (currentFile.size >= MAX_CONTENT_LENGTH) {
         console.error('Max content limit exceeded.')
         continue
       }
