@@ -56,12 +56,19 @@ class PhotosForm extends React.Component {
 
     for (let i = 0; i < this.fileInput.current.files.length; i++) {
       this.handleUploadUpdate(i + 1, this.fileInput.current.files.length)
-      if (this.fileInput.current.files[i].length >= maxContentLength) {
+      
+      let currentFile = this.fileInput.current.files[i];
+      if (currentFile.size >= maxContentLength) {
         console.error('Max content limit exceeded.')
         continue
       }
+      if(currentFile.type !== "image/jpeg") {
+        console.error('unsupported content type.')
+        continue
+      }
+      
       let data = new FormData()
-      data.append('file' + i, this.fileInput.current.files[i])
+      data.append('file' + i, currentFile)
 
       let response = await fetch('/api/photos', {
         method: 'POST',
@@ -73,7 +80,7 @@ class PhotosForm extends React.Component {
         this.handleError(response)
         break
       } else {
-        console.log(`file ${i+1} uploaded successfully.`, this.fileInput.current.files[i])
+        console.log(`file ${i+1} uploaded successfully.`, currentFile)
       }
     }
     this.handleSuccess()
