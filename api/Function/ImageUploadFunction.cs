@@ -61,7 +61,7 @@ namespace JKWedding.Function
             // Create the container and return a container client object
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("jk-wedding-photos");
             // Get a reference to a blob
-            string blobName = Guid.NewGuid().ToString();
+            string blobName = $"{Guid.NewGuid().ToString()}.jpeg";
             BlobClient blobClient = containerClient.GetBlobClient(blobName);
             BlobContentInfo response = null;
             using (var stream = file.OpenReadStream())
