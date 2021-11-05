@@ -2,7 +2,7 @@ import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
 import BlobStorageService from '../services/blobStorageService'
 
-const maxContentLength = 10485760
+const maxContentLength = 104857600;
 class PhotosForm extends React.Component {
   constructor(props) {
     super(props)
@@ -66,7 +66,7 @@ class PhotosForm extends React.Component {
         console.error('unsupported content type.')
         continue
       }
-      
+
       let data = new FormData()
       data.append('file' + i, currentFile)
 
