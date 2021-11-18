@@ -6,7 +6,7 @@ import PhotosForm from '../components/PhotosForm'
 
 const SecondPage = () => (
   <Layout>
-    <h1>Upload Photos</h1>
+    <h1>Upload Goodies</h1>
 
     <PhotosForm />
     

@@ -39,15 +39,15 @@ const Header = props => (
             How do I get there?
           </button>
         </li>
-        {/* <li>
+        <li>
           <button
             onClick={() => {
               props.onOpenArticle('photos')
             }}
           >
-            Upload photos
+            Upload media
           </button>
-        </li> */}
+        </li>
         <li>
           <button
             onClick={() => {
