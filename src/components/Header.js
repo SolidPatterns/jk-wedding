@@ -45,7 +45,7 @@ const Header = props => (
               props.onOpenArticle('photos')
             }}
           >
-            Upload media
+            Upload goodies
           </button>
         </li>
         <li>
