@@ -1,9 +1,9 @@
 import React from 'react'
 import thankYouCaillou from '../images/thank-you.png'
-import BlobStorageService from '../services/blobStorageService'
 import Loading from '../assets/Infinity-1s-200px.svg'
 
 const MAX_CONTENT_LENGTH = 104857600
+const ALLOWED_MIME_TYPES = ["image/jpeg", "video/3gpp", "video/mp4", "video/mpeg", "video/ogg", "video/quicktime"];
 class PhotosForm extends React.Component {
   constructor(props) {
     super(props)
@@ -74,7 +74,7 @@ class PhotosForm extends React.Component {
         console.error('Max content limit exceeded.')
         continue
       }
-      if (currentFile.type !== 'image/jpeg') {
+      if (!ALLOWED_MIME_TYPES.includes(currentFile.type)) {
         console.error('unsupported content type.')
         continue
       }
@@ -139,7 +139,7 @@ class PhotosForm extends React.Component {
               : 'hide'
           }
         >
-          We know you have a gold mine of amazing photos. We'd love to have
+          We know you have a gold mine of amazing photos and videos. We'd love to have
           those too 😁 <br />
           It's super duper easy.
           <br />
@@ -164,7 +164,7 @@ class PhotosForm extends React.Component {
               type="file"
               name="file"
               id="file"
-              accept=".jpeg"
+              accept="video/*,image/*"
               onChange={this.handleInputChange}
               ref={this.fileInput}
               multiple

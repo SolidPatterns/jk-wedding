@@ -13,6 +13,8 @@ namespace JKWedding.Function
 {
     public static partial class JKWeddingFunction
     {
+        public static readonly string[] AllowedMimeTypes = {"image/jpeg", "video/3gpp", "video/mp4", "video/mpeg", "video/ogg", "video/quicktime"};
+
         [FunctionName("photos")]
         public static async Task<IActionResult> PostPhotos(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", "get", Route = null)] HttpRequest req,
@@ -43,7 +45,7 @@ namespace JKWedding.Function
             }
             
             var file = req.Form.Files[0];
-            if (file.ContentType != System.Net.Mime.MediaTypeNames.Image.Jpeg)
+            if (!AllowedMimeTypes.Contains(file.ContentType))
             {
                 return new StatusCodeResult(StatusCodes.Status415UnsupportedMediaType);
             }
@@ -59,7 +61,8 @@ namespace JKWedding.Function
             // Create the container and return a container client object
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("jk-wedding-photos");
             // Get a reference to a blob
-            string blobName = $"{Guid.NewGuid().ToString()}.jpeg";
+            string blobName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+            
             BlobClient blobClient = containerClient.GetBlobClient(blobName);
             BlobContentInfo response = null;
             using (var stream = file.OpenReadStream())
